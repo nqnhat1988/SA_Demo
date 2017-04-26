@@ -42,6 +42,7 @@ public class SA_BarChartFragment extends Fragment implements OnChartValueSelecte
     protected BarChart mChart;
     private Typeface mTfLight;
     private ArrayList<SA_Portfolio> arrayList;
+    private ArrayList<BarDataSet> dataSets;
     private SA_MainActivity.MODE mode;
     private int currentSearchYear = 2017;
 
@@ -103,8 +104,6 @@ public class SA_BarChartFragment extends Fragment implements OnChartValueSelecte
 
         mChart.setDrawGridBackground(false);
 
-        IAxisValueFormatter xAxisFormatter = new LargeValueFormatter();
-
         XAxis xAxis = mChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setTypeface(mTfLight);
@@ -147,7 +146,7 @@ public class SA_BarChartFragment extends Fragment implements OnChartValueSelecte
         int groupCount = 0;
         int start = 1;
 
-        setupSpace(arrayList.size());
+        setupSpace(arrayList.size() + 1);
 
         switch (mode) {
             case DAILY:
@@ -166,6 +165,24 @@ public class SA_BarChartFragment extends Fragment implements OnChartValueSelecte
         for (int i = 0; i < arrayList.size(); i++) {
             BarDataSet barDataSet = createDataSet(arrayList.get(i), getRandomColor(), mode);
             dataSets.add(i,barDataSet);
+        }
+
+        if (arrayList.size() > 1) {
+            ArrayList<BarEntry> sumEntries = new ArrayList<>();
+
+            for (int j = 0; j < dataSets.get(0).getEntryCount(); j++) {
+                float sum = 0;
+                for (int i = 0; i < dataSets.size(); i++) {
+                    BarEntry barEntry = dataSets.get(i).getEntryForIndex(j);
+                    float valueOfEntry = barEntry.getY();
+                    sum += valueOfEntry;
+                }
+                BarEntry sumEntry = new BarEntry(j,sum);
+                sumEntries.add(sumEntry);
+            }
+
+            BarDataSet sumDataSet = new BarDataSet(sumEntries,"Sum of Portfolios");
+            dataSets.add(sumDataSet);
         }
 
         BarData data = new BarData(dataSets);

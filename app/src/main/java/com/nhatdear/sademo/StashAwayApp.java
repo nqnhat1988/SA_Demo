@@ -64,15 +64,7 @@ public class StashAwayApp extends Application {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 double offset = snapshot.getValue(Double.class);
-                if (offset > maximumTimeOffsetInMinutes * 60 * 1000) {
-                    new AlertDialog.Builder(getApplicationContext())
-                            .setCancelable(false)
-                            .setTitle("ERROR")
-                            .setMessage("Your device has above 10 minutes different from our server! Please check your device time.")
-                            .setPositiveButton("OK", (dialogInterface, i) -> System.exit(0)).create().show();
-                } else {
-                    estimatedServerTimeMs = System.currentTimeMillis() + Double.valueOf(offset).longValue();
-                }
+                estimatedServerTimeMs = System.currentTimeMillis() + Double.valueOf(offset).longValue();
             }
 
             @Override

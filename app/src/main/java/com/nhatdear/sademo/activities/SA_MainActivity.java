@@ -21,10 +21,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.nhatdear.sademo.R;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseUser;
 import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.nhatdear.sademo.R;
 import com.nhatdear.sademo.StashAwayApp;
 import com.nhatdear.sademo.components.MyCustomTextView;
 import com.nhatdear.sademo.database.SA_FirebaseDatabase;
@@ -47,6 +47,7 @@ public class SA_MainActivity extends SA_BaseActivity
     private static final String TAG = SA_MainActivity.class.getSimpleName();
     private RadioGroup radioGroup1;
     private ArrayList<SA_Portfolio> arrayList;
+
     private int currentSearchYear = 2017;
     private MyCustomTextView tv_chart_name;
     public enum MODE {
@@ -54,6 +55,7 @@ public class SA_MainActivity extends SA_BaseActivity
         QUARTERLY,
         MONTHLY
     }
+    private MODE mode = MONTHLY;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,13 +98,16 @@ public class SA_MainActivity extends SA_BaseActivity
             switch (checkedId)
             {
                 case R.id.rbtn_daily:
-                    setDataToChart(arrayList,DAILY);
+                    mode = DAILY;
+                    setDataToChart(arrayList, mode);
                     break;
                 case R.id.rbtn_monthly:
-                    setDataToChart(arrayList,MONTHLY);
+                    mode = MONTHLY;
+                    setDataToChart(arrayList, mode);
                     break;
                 case R.id.rbtn_quarterly:
-                    setDataToChart(arrayList, QUARTERLY);
+                    mode = QUARTERLY;
+                    setDataToChart(arrayList, mode);
                     break;
                 default:
                     break;
@@ -129,7 +134,7 @@ public class SA_MainActivity extends SA_BaseActivity
             SA_FirebaseDatabase database = new SA_FirebaseDatabase();
             database.getPortfolios(currentSearchYear).subscribe(array->{
                 arrayList = array;
-                setDataToChart(arrayList, MONTHLY);
+                setDataToChart(arrayList, mode);
                 hideProgressDialog();
             },throwable -> {
                 hideProgressDialog();
