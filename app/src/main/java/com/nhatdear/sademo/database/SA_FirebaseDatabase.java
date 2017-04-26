@@ -1,5 +1,7 @@
 package com.nhatdear.sademo.database;
 
+import android.support.annotation.NonNull;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -13,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import io.reactivex.Observable;
+
+import static com.nhatdear.sademo.models.SA_Portfolio.convertDataSnapshotToPortfolios;
 
 /**
  * Created by NhatNguyen on 11/24/2016.
@@ -48,16 +52,10 @@ public class SA_FirebaseDatabase {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     reference.keepSynced(false);
                     if (dataSnapshot == null || dataSnapshot.getValue() == null) {
-                        subscriber.onNext(new ArrayList<SA_Portfolio>());
+                        subscriber.onNext(new ArrayList<>());
                     } else {
 
-                        ArrayList<SA_Portfolio> arrayList = new ArrayList<>();
-                        ArrayList<HashMap> dataSnapshotArrayList = (ArrayList<HashMap>)dataSnapshot.getValue();
-                        for (int i = 0; i < dataSnapshotArrayList.size(); i++) {
-                            HashMap porfolioSnapshot = dataSnapshotArrayList.get(i);
-                            SA_Portfolio sa_portfolio = new SA_Portfolio(porfolioSnapshot);
-                            arrayList.add(sa_portfolio);
-                        }
+                        ArrayList<SA_Portfolio> arrayList = convertDataSnapshotToPortfolios(dataSnapshot);
 
                         subscriber.onNext(arrayList);
                     }
@@ -76,6 +74,7 @@ public class SA_FirebaseDatabase {
         DatabaseReference reference = mDatabase.getReference(dataNode).child(porfolioNode  + "Test");
         reference.setValue(arrayList);
     }
+
     public void getUserInformation(String uuid,ValueEventListener postListener) {
         DatabaseReference reference = mDatabase.getReference(usersNode).child(uuid);
         reference.keepSynced(true);

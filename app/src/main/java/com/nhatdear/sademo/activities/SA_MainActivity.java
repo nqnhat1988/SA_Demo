@@ -121,20 +121,20 @@ public class SA_MainActivity extends SA_BaseActivity
 
             @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
                 currentSearchYear = Integer.parseInt(item);
-                getDataFromFirebase();
+                getDataFromFirebase(currentSearchYear, mode);
             }
         });
 
-        getDataFromFirebase();
+        getDataFromFirebase(currentSearchYear, mode);
     }
 
-    private void getDataFromFirebase() {
+    private void getDataFromFirebase(int _currentSearchYear, MODE _mode) {
         try {
             showProgressDialog("Loading portfolio data");
             SA_FirebaseDatabase database = new SA_FirebaseDatabase();
-            database.getPortfolios(currentSearchYear).subscribe(array->{
-                arrayList = array;
-                setDataToChart(arrayList, mode);
+            database.getPortfolios(_currentSearchYear).subscribe(array->{
+                this.arrayList = array;
+                setDataToChart(this.arrayList, _mode);
                 hideProgressDialog();
             },throwable -> {
                 hideProgressDialog();

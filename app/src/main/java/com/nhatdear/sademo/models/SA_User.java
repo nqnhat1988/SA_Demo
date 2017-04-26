@@ -131,16 +131,6 @@ public class SA_User {
         this.ts_lastupdated = StashAwayApp.getInstance().getEstimatedServerTime();
         return dp_firebaseDatabase.saveUser(this);
     }
-//
-//    public void saveSettings(EnumUtils.SETTING_MODE settingMode, Object... params) {
-//        DP_FirebaseDatabase dp_firebaseDatabase = new DP_FirebaseDatabase();
-//        dp_firebaseDatabase.saveSettings(this, settingMode, params);
-//    }
-//
-//    public void saveLastArtwork(String uuid) {
-//        DP_FirebaseDatabase dp_firebaseDatabase = new DP_FirebaseDatabase();
-//        dp_firebaseDatabase.saveUserLastArtwork(this, uuid);
-//    }
 
     @Override
     public String toString() {

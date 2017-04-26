@@ -1,5 +1,11 @@
 package com.nhatdear.sademo.models;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -46,5 +52,17 @@ public class SA_Portfolio {
 
     public void setNavs(ArrayList<SA_Nav> navs) {
         this.navs = navs;
+    }
+
+    @NonNull
+    public static ArrayList<SA_Portfolio> convertDataSnapshotToPortfolios(DataSnapshot dataSnapshot) {
+        ArrayList<SA_Portfolio> arrayList = new ArrayList<>();
+        ArrayList<HashMap> dataSnapshotArrayList = (ArrayList<HashMap>)dataSnapshot.getValue();
+        for (int i = 0; i < dataSnapshotArrayList.size(); i++) {
+            HashMap porfolioSnapshot = dataSnapshotArrayList.get(i);
+            SA_Portfolio sa_portfolio = new SA_Portfolio(porfolioSnapshot);
+            arrayList.add(sa_portfolio);
+        }
+        return arrayList;
     }
 }
