@@ -12,7 +12,7 @@ android {
         applicationId "com.nhatdear.sademo"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode System.getProperty("CI_BUILD_NUMBER") ? System.getProperty("CI_BUILD_NUMBER").toInteger() : 4
+        versionCode System.getProperty("CI_BUILD_NUMBER") ? System.getProperty("CI_BUILD_NUMBER").toInteger() : 5
         versionName System.getProperty("CI_BUILD_VERSION") ? System.getProperty("CI_BUILD_VERSION") : "dev-" + new SimpleDateFormat("yyMMdd").format(new Date()) + "_02"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
