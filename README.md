@@ -13,6 +13,7 @@ Features
  - MPAndroidChart
  - Loading data from Firebase by year
  - Support display data as Line, Bar Chart
+ 
 Usage
 -----
  - Reposity link : https://github.com/nqnhat1988/SA_Demo
