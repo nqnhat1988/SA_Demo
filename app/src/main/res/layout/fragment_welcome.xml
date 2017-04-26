@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_dp__welcome_screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/windowBackground">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/biglogo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/logo" />
+
+    <com.nhatdear.sademo.components.MyCustomTextView
+        android:id="@+id/signupText"
+        style="@style/TitleStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/biglogo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp"
+        android:text="@string/sign_up"
+        android:textSize="22sp"
+        app:tv_customFont="@string/font_MontserratRegular" />
+
+    <LinearLayout
+        android:id="@+id/ln_signUpFB"
+        android:layout_width="300dp"
+        android:layout_height="43dp"
+        android:layout_below="@id/signupText"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="21dp"
+        android:background="@color/com_facebook_blue"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/com_facebook_button_icon_white" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+            <com.nhatdear.sademo.components.MyCustomTextView
+                android:id="@+id/btn_signUpFB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:letterSpacing="0.2"
+                android:paddingLeft="10dp"
+                android:text="@string/signUpWithFB"
+                android:textAllCaps="true"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="12sp"
+                app:tv_customFont="@string/font_MontserratRegular" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/line_Divider"
+        android:layout_width="200dp"
+        android:layout_height="2dp"
+        android:layout_below="@+id/ln_signUpFB"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="#dddddd" />
+
+    <com.nhatdear.sademo.components.MyCustomButtonView
+        android:id="@+id/btn_signUpEmail"
+        style="@style/ButtonStyleDark"
+        android:layout_width="300dp"
+        android:layout_height="43dp"
+        android:letterSpacing="0.2"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/line_Divider"
+        android:text="@string/signUpWithEmail"
+        android:textSize="12sp"
+        app:bt_customFont="@string/font_MontserratRegular"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/tv_information"
+        android:layout_alignStart="@+id/tv_information" />
+
+
+    <com.nhatdear.sademo.components.MyCustomTextView
+        android:id="@+id/tv_information"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_doLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:text="@string/term"
+        android:textAlignment="center"
+        app:tv_customFont="@string/font_OpenSans" />
+
+    <com.nhatdear.sademo.components.MyCustomButtonView
+        android:id="@+id/btn_doLogin"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorAccent"
+        android:text="@string/doLogin"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        app:bt_customFont="@string/font_OpenSans" />
+</RelativeLayout>

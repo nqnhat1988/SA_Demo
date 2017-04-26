@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "135711047819",
+    "firebase_url": "https://sademo-a6213.firebaseio.com",
+    "project_id": "sademo-a6213",
+    "storage_bucket": "sademo-a6213.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135711047819:android:10875af781a0174d",
+        "android_client_info": {
+          "package_name": "com.nhatdear.sademo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135711047819-2ke4ijt96v1ar900m3mqme0f62i18gqi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nhatdear.sademo",
+            "certificate_hash": "ef55bfbad405c04b203df6000f9c9b49be3cd186"
+          }
+        },
+        {
+          "client_id": "135711047819-02vl0gkm328m9i1negiqaf7l88bhcra6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMoDIX85mAq4RjQ0ECXXSnnaMQayT70cU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "135711047819-02vl0gkm328m9i1negiqaf7l88bhcra6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

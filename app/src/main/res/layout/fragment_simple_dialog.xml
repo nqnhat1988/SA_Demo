@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="300dp"
+    android:orientation="vertical">
+
+    <com.nhatdear.sademo.components.MyCustomTextView
+        android:id="@+id/tv_title"
+        style="@style/TitleStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/excuse_me"
+        app:tv_customFont="@string/font_MontserratRegular" />
+
+    <com.nhatdear.sademo.components.MyCustomTextView
+        android:id="@+id/tv_message"
+        style="@style/LabelStyleDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/please_enter_user_name"
+        android:textSize="14sp"
+        app:tv_customFont="@string/font_MontserratRegular" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_editName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_userName"
+        android:padding="10dp">
+
+        <com.nhatdear.sademo.components.MyCustomEditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapCharacters"
+            android:textColor="@color/colorAccent"
+            android:textSize="17sp"
+            app:bt_customFont="@string/font_MontserratRegular" />
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.nhatdear.sademo.components.MyCustomButtonView
+            android:id="@+id/btn_ok"
+            style="@style/ButtonStyleDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:text="@string/ok"
+            app:bt_customFont="@string/font_MontserratRegular" />
+
+        <com.nhatdear.sademo.components.MyCustomButtonView
+            android:id="@+id/btn_cancel"
+            style="@style/ButtonStyleLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            app:bt_customFont="@string/font_MontserratRegular" />
+    </LinearLayout>
+</LinearLayout>

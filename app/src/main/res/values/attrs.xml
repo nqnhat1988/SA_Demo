@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyCustomTextView">
+        <attr name="tv_customFont" format="string" />
+    </declare-styleable>
+    <declare-styleable name="MyCustomButtonView">
+        <attr name="bt_customFont" format="string" />
+    </declare-styleable>
+    <declare-styleable name="MyCustomEditText">
+        <attr name="et_customFont" format="string" />
+    </declare-styleable>
+</resources>

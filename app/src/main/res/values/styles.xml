@@ -1,0 +1,69 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="SA_AppTheme" parent="Theme.AppCompat.Light">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="FullyTranslucent" parent="android:Theme.Translucent.NoTitleBar">
+        <item name="android:progressBarStyle">@style/InvisibleProgress</item>
+    </style>
+
+    <style name="InvisibleProgress">
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="TitleStyleBase">
+        <item name="android:textColor">@color/textColorPrimaryBlack</item>
+    </style>
+
+    <style name="TitleStyle" parent="TitleStyleBase">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="ButtonStyleBase" parent="Base.Widget.AppCompat.Button">
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="ButtonStyleDark" parent="ButtonStyleBase">
+        <item name="android:textSize">12sp</item>
+        <item name="android:background">@drawable/button_color_selector_black</item>
+    </style>
+
+    <style name="ButtonStyleLight" parent="ButtonStyleDark">
+        <item name="android:textColor">@color/textColorPrimaryBlack</item>
+        <item name="android:background">@drawable/button_color_selector_light</item>
+    </style>
+
+    <style name="TitleStyleAlter" parent="TitleStyle">
+        <item name="android:textColor">@color/textColorLabel</item>
+    </style>
+
+    <style name="LabelStyleBase">
+        <item name="android:textColor">@color/textColorLabel_2</item>
+    </style>
+
+    <style name="LabelStyleDark" parent="LabelStyleBase">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+</resources>

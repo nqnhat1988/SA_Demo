@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#105bad</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="textColorLabel">#4A4A4A</color>
+    <color name="textColorLabel_2">#545454</color>
+    <color name="textColorPrimaryBlack">#105bad</color>
+    <color name="textColorAnimationGeo" tools:ignore="UnusedResources">#797979</color>
+    <color name="textColorError">#AB0015</color>
+    <color name="snackBarColor">#7ED321</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="windowBackgroundBlack">#111111</color>
+    <color name="navigationBarColor">#FFFFFF</color>
+    <color name="tab_background_selected">#111111</color>
+    <color name="tab_background_unselected">#FFFFFF</color>
+    <color name="color_1">#E3E3E3</color>
+    <color name="color_1_tint_30">#4DE3E3E3</color>
+    <color name="filter_line">#797979</color>
+    <color name="color_2" tools:ignore="UnusedResources">#221E1F</color>
+    <color name="bg_tag">#E0E0E0</color>
+    <color name="dark_clr">#333333</color>
+    <color name="colorTag">#FF4081</color>
+</resources>

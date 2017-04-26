@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TitleStyleBase">
+        <item name="android:textColor">@color/textColorPrimaryBlack</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="ButtonStyleBase" parent="Base.Widget.AppCompat.Button">
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="LabelStyleBase">
+        <item name="android:textColor">@color/textColorLabel_2</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+</resources>
