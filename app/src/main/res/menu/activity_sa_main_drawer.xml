@@ -3,13 +3,13 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_statement"
-            android:icon="@drawable/ic_assignment_black_24dp"
-            android:title="My Statements" />
+            android:id="@+id/nav_showAsBarChart"
+            android:icon="@drawable/ic_insert_chart_black_24dp"
+            android:title="Display As Bar chart" />
         <item
-            android:id="@+id/nav_withdraw"
-            android:icon="@drawable/ic_credit_card_black_24dp"
-            android:title="Withdraw money" />
+            android:id="@+id/showAsLineChart"
+            android:icon="@drawable/ic_show_chart_black_24dp"
+            android:title="Display As Line chart" />
         <item
             android:id="@+id/nav_referrals"
             android:icon="@drawable/ic_perm_media_black_24dp"

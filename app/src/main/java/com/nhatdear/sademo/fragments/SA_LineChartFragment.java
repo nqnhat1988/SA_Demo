@@ -9,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.nhatdear.sademo.R;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -19,14 +19,19 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.LargeValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.nhatdear.sademo.R;
 import com.nhatdear.sademo.activities.SA_MainActivity;
 import com.nhatdear.sademo.helpers.DateUtils;
 import com.nhatdear.sademo.helpers.chart.DayAxisValueFormatter;
+import com.nhatdear.sademo.helpers.chart.LineDayAxisValueFormatter;
 import com.nhatdear.sademo.models.SA_Nav;
 import com.nhatdear.sademo.models.SA_Portfolio;
 
@@ -34,31 +39,31 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
-public class SA_BarChartFragment extends Fragment implements OnChartValueSelectedListener {
+public class SA_LineChartFragment extends Fragment implements OnChartValueSelectedListener {
 
     float groupSpace = 0.0f;
     float barSpace = 0.0f;
     float barWidth = 0.0f;
-    protected BarChart mChart;
+    protected LineChart mChart;
     private Typeface mTfLight;
     private ArrayList<SA_Portfolio> arrayList;
     private ArrayList<BarDataSet> dataSets;
     private SA_MainActivity.MODE mode;
     private int currentSearchYear = 2017;
 
-    public SA_BarChartFragment() {
+    public SA_LineChartFragment() {
         // Required empty public constructor
     }
 
-    public static SA_BarChartFragment newInstance(ArrayList<SA_Portfolio> arrayList, SA_MainActivity.MODE mode) {
-        SA_BarChartFragment fragment = new SA_BarChartFragment();
+    public static SA_LineChartFragment newInstance(ArrayList<SA_Portfolio> arrayList, SA_MainActivity.MODE mode) {
+        SA_LineChartFragment fragment = new SA_LineChartFragment();
         fragment.arrayList = arrayList;
         fragment.mode = mode;
         return fragment;
     }
 
-    public static SA_BarChartFragment newInstance(ArrayList<SA_Portfolio> arrayList, SA_MainActivity.MODE mode, int year) {
-        SA_BarChartFragment fragment = new SA_BarChartFragment();
+    public static SA_LineChartFragment newInstance(ArrayList<SA_Portfolio> arrayList, SA_MainActivity.MODE mode, int year) {
+        SA_LineChartFragment fragment = new SA_LineChartFragment();
         fragment.arrayList = arrayList;
         fragment.mode = mode;
         fragment.currentSearchYear = year;
@@ -74,11 +79,11 @@ public class SA_BarChartFragment extends Fragment implements OnChartValueSelecte
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_sa__bar_chart, container, false);
+        View view = inflater.inflate(R.layout.fragment_sa__line_chart, container, false);
 
         mTfLight = Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Light.ttf");
 
-        mChart = (BarChart) view.findViewById(R.id.chart);
+        mChart = (LineChart) view.findViewById(R.id.chart);
         mChart.setOnChartValueSelectedListener(this);
 
         setupBarChart();
@@ -92,37 +97,34 @@ public class SA_BarChartFragment extends Fragment implements OnChartValueSelecte
     }
 
     private void setupBarChart() {
-        mChart.setDrawBarShadow(false);
-
-        mChart.setDrawValueAboveBar(true);
 
         mChart.getDescription().setEnabled(false);
 
         mChart.setPinchZoom(false);
 
-        mChart.setDrawBarShadow(false);
-
         mChart.setDrawGridBackground(false);
+        mChart.getDescription().setEnabled(false);
+        mChart.setDrawBorders(false);
 
         XAxis xAxis = mChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setTypeface(mTfLight);
         xAxis.setGranularity(1f);
-        xAxis.setCenterAxisLabels(true);
-        xAxis.setValueFormatter(new IAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-                return String.valueOf((int) value);
-            }
-        });
+        //xAxis.setCenterAxisLabels(true);
+//        xAxis.setValueFormatter(new IAxisValueFormatter() {
+//            @Override
+//            public String getFormattedValue(float value, AxisBase axis) {
+//                return String.valueOf((int) value);
+//            }
+//        });
 
         YAxis leftAxis = mChart.getAxisLeft();
-        leftAxis.setTypeface(mTfLight);
-        leftAxis.setValueFormatter(new LargeValueFormatter());
-        leftAxis.setDrawGridLines(false);
-        leftAxis.setSpaceTop(35f);
-        leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
-
+//        leftAxis.setTypeface(mTfLight);
+//        leftAxis.setValueFormatter(new LargeValueFormatter());
+//        leftAxis.setDrawGridLines(false);
+//        leftAxis.setSpaceTop(35f);
+//        leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
+        leftAxis.setEnabled(false);
         mChart.getAxisRight().setEnabled(false);
 
         Legend l = mChart.getLegend();
@@ -141,79 +143,56 @@ public class SA_BarChartFragment extends Fragment implements OnChartValueSelecte
     }
 
     private void setDataToChart(ArrayList<SA_Portfolio> arrayList, SA_MainActivity.MODE mode) {
+        mChart.resetTracking();
+
         if (arrayList == null || arrayList.size() == 0) return;
 
-        int groupCount = 0;
-        int start = 1;
-
-        setupSpace(arrayList.size() + 1);
-
-        switch (mode) {
-            case DAILY:
-                groupCount = 365;
-                break;
-            case QUARTERLY:
-                groupCount = 4;
-                break;
-            case MONTHLY:
-                groupCount = 12;
-                break;
-        }
-
-        ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+        ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
 
         for (int i = 0; i < arrayList.size(); i++) {
-            BarDataSet barDataSet = createDataSet(arrayList.get(i), getRandomColor(), mode);
+            LineDataSet barDataSet = createDataSet(arrayList.get(i), getRandomColor(), mode);
             dataSets.add(i,barDataSet);
         }
 
         if (arrayList.size() > 1) {
-            ArrayList<BarEntry> sumEntries = new ArrayList<>();
+            ArrayList<Entry> sumEntries = new ArrayList<>();
 
             for (int j = 0; j < dataSets.get(0).getEntryCount(); j++) {
                 float sum = 0;
                 for (int i = 0; i < dataSets.size(); i++) {
-                    BarEntry barEntry = dataSets.get(i).getEntryForIndex(j);
+                    Entry barEntry = dataSets.get(i).getEntryForIndex(j);
                     float valueOfEntry = barEntry.getY();
                     sum += valueOfEntry;
                 }
-                BarEntry sumEntry = new BarEntry(j,sum);
+                Entry sumEntry = new Entry(j,sum);
                 sumEntries.add(sumEntry);
             }
 
-            BarDataSet sumDataSet = new BarDataSet(sumEntries,"Sum of Portfolios");
+            LineDataSet sumDataSet = new LineDataSet(sumEntries,"Sum of Portfolios");
             dataSets.add(sumDataSet);
         }
 
-        BarData data = new BarData(dataSets);
+        LineData data = new LineData(dataSets);
         data.setValueTextSize(10f);
         data.setValueTypeface(mTfLight);
 
         mChart.setData(data);
 
-        // specify the width each bar should have
-        mChart.getBarData().setBarWidth(barWidth);
-        // restrict the x-axis range
-        mChart.getXAxis().setAxisMinimum(start);
-
-        // barData.getGroupWith(...) is a helper that calculates the width each group needs based on the provided parameters
-        mChart.getXAxis().setAxisMaximum(start + mChart.getBarData().getGroupWidth(groupSpace, barSpace) * groupCount);
-        mChart.groupBars(start, groupSpace, barSpace);
-        IAxisValueFormatter xAxisFormatter = new DayAxisValueFormatter(mChart, currentSearchYear, mode);
+        IAxisValueFormatter xAxisFormatter = new LineDayAxisValueFormatter(currentSearchYear, mode);
         mChart.getXAxis().setValueFormatter(xAxisFormatter);
         mChart.invalidate();
         mChart.clearAllViewportJobs();
         mChart.fitScreen();
-        mChart.setVisibleXRangeMaximum(2);
+        mChart.setVisibleXRangeMaximum(5);
         mChart.moveViewToX(0); //
     }
 
-    private BarDataSet createDataSet(SA_Portfolio sa_portfolio, int color, SA_MainActivity.MODE mode) {
+    private LineDataSet createDataSet(SA_Portfolio sa_portfolio, int color, SA_MainActivity.MODE mode) {
 
         if (sa_portfolio.getNavs().size() == 0) return null;
         try {
-            ArrayList<BarEntry> yVals = new ArrayList<BarEntry>();
-            BarDataSet dataSet;
+            ArrayList<Entry> yVals = new ArrayList<>();
+            LineDataSet dataSet;
 
             switch (mode) {
                 case DAILY:
@@ -235,9 +214,9 @@ public class SA_BarChartFragment extends Fragment implements OnChartValueSelecte
                     for (int i = 0; i < sa_portfolio.getNavs().size(); i++) {
                         SA_Nav sa_nav = sa_portfolio.getNavs().get(i);
                         int index = DateUtils.getQuarterFromDate(sa_nav.getDate()) - 1;
-                        BarEntry barEntry = yVals.get(index);
-                        float sum = barEntry.getY() + Float.parseFloat(String.valueOf(sa_nav.getAmount()));
-                        barEntry.setY(sum);
+                        Entry entry = yVals.get(index);
+                        float sum = entry.getY() + Float.parseFloat(String.valueOf(sa_nav.getAmount()));
+                        entry.setY(sum);
                     }
                     break;
                 case MONTHLY:
@@ -248,15 +227,16 @@ public class SA_BarChartFragment extends Fragment implements OnChartValueSelecte
                     for (int i = 0; i < sa_portfolio.getNavs().size(); i++) {
                         SA_Nav sa_nav = sa_portfolio.getNavs().get(i);
                         int index = DateUtils.getMonthFromDate(sa_nav.getDate()) - 1;
-                        BarEntry barEntry = yVals.get(index);
-                        float sum = barEntry.getY() + Float.parseFloat(String.valueOf(sa_nav.getAmount()));
-                        barEntry.setY(sum);
+                        Entry entry = yVals.get(index);
+                        float sum = entry.getY() + Float.parseFloat(String.valueOf(sa_nav.getAmount()));
+                        entry.setY(sum);
                     }
                     break;
             }
 
-            dataSet = new BarDataSet(yVals, String.format("Portfolio %s", sa_portfolio.getPortfolioId()) );
-            dataSet.setDrawIcons(false);
+            dataSet = new LineDataSet(yVals, String.format("Portfolio %s", sa_portfolio.getPortfolioId()) );
+            dataSet.setLineWidth(2.5f);
+            dataSet.setCircleRadius(4f);
             dataSet.setColors(color);
             return dataSet;
         } catch (Exception e) {

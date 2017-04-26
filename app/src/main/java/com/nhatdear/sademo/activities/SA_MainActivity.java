@@ -29,6 +29,7 @@ import com.nhatdear.sademo.StashAwayApp;
 import com.nhatdear.sademo.components.MyCustomTextView;
 import com.nhatdear.sademo.database.SA_FirebaseDatabase;
 import com.nhatdear.sademo.fragments.SA_BarChartFragment;
+import com.nhatdear.sademo.fragments.SA_LineChartFragment;
 import com.nhatdear.sademo.helpers.RoundImageTransform;
 import com.nhatdear.sademo.helpers.SA_Helper;
 import com.nhatdear.sademo.models.SA_Portfolio;
@@ -37,6 +38,8 @@ import com.nhatdear.sademo.models.SA_User;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.nhatdear.sademo.activities.SA_MainActivity.CHART_TYPE.BAR;
+import static com.nhatdear.sademo.activities.SA_MainActivity.CHART_TYPE.LINE;
 import static com.nhatdear.sademo.activities.SA_MainActivity.MODE.DAILY;
 import static com.nhatdear.sademo.activities.SA_MainActivity.MODE.MONTHLY;
 import static com.nhatdear.sademo.activities.SA_MainActivity.MODE.QUARTERLY;
@@ -55,7 +58,13 @@ public class SA_MainActivity extends SA_BaseActivity
         QUARTERLY,
         MONTHLY
     }
+
+    public enum CHART_TYPE {
+        BAR,
+        LINE
+    }
     private MODE mode = MONTHLY;
+    private CHART_TYPE chart_type = LINE;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,15 +108,15 @@ public class SA_MainActivity extends SA_BaseActivity
             {
                 case R.id.rbtn_daily:
                     mode = DAILY;
-                    setDataToChart(arrayList, mode);
+                    setDataToChart(arrayList, mode, chart_type);
                     break;
                 case R.id.rbtn_monthly:
                     mode = MONTHLY;
-                    setDataToChart(arrayList, mode);
+                    setDataToChart(arrayList, mode, chart_type);
                     break;
                 case R.id.rbtn_quarterly:
                     mode = QUARTERLY;
-                    setDataToChart(arrayList, mode);
+                    setDataToChart(arrayList, mode, chart_type);
                     break;
                 default:
                     break;
@@ -121,20 +130,20 @@ public class SA_MainActivity extends SA_BaseActivity
 
             @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
                 currentSearchYear = Integer.parseInt(item);
-                getDataFromFirebase(currentSearchYear, mode);
+                getDataFromFirebase(currentSearchYear, mode, chart_type);
             }
         });
 
-        getDataFromFirebase(currentSearchYear, mode);
+        getDataFromFirebase(currentSearchYear, mode, chart_type);
     }
 
-    private void getDataFromFirebase(int _currentSearchYear, MODE _mode) {
+    private void getDataFromFirebase(int _currentSearchYear, MODE _mode, CHART_TYPE _chart_type) {
         try {
             showProgressDialog("Loading portfolio data");
             SA_FirebaseDatabase database = new SA_FirebaseDatabase();
             database.getPortfolios(_currentSearchYear).subscribe(array->{
                 this.arrayList = array;
-                setDataToChart(this.arrayList, _mode);
+                setDataToChart(this.arrayList, _mode, _chart_type);
                 hideProgressDialog();
             },throwable -> {
                 hideProgressDialog();
@@ -146,10 +155,19 @@ public class SA_MainActivity extends SA_BaseActivity
         }
     }
 
-    private void setDataToChart(ArrayList<SA_Portfolio> arrayList, MODE mode) {
+    private void setDataToChart(ArrayList<SA_Portfolio> arrayList, MODE mode, CHART_TYPE chart_type) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction().replace(R.id.fragment_container, SA_BarChartFragment.newInstance(arrayList, mode)).addToBackStack("BAR");
-        fragmentTransaction.commit();
+        FragmentTransaction fragmentTransaction;
+        switch (chart_type) {
+            case BAR:
+                fragmentTransaction = fragmentManager.beginTransaction().replace(R.id.fragment_container, SA_BarChartFragment.newInstance(arrayList, mode)).addToBackStack("BAR CHART");
+                fragmentTransaction.commit();
+                break;
+            case LINE:
+                fragmentTransaction = fragmentManager.beginTransaction().replace(R.id.fragment_container, SA_LineChartFragment.newInstance(arrayList, mode)).addToBackStack("LINE CHART");
+                fragmentTransaction.commit();
+                break;
+        }
     }
 
     @Override
@@ -207,10 +225,12 @@ public class SA_MainActivity extends SA_BaseActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_statement) {
-
-        } else if (id == R.id.nav_withdraw) {
-
+        if (id == R.id.nav_showAsBarChart) {
+            chart_type = BAR;
+            setDataToChart(arrayList,mode,chart_type);
+        } else if (id == R.id.showAsLineChart) {
+            chart_type = LINE;
+            setDataToChart(arrayList,mode,chart_type);
         } else if (id == R.id.nav_referrals) {
 
         } else if (id == R.id.nav_support) {
