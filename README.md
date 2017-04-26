@@ -11,8 +11,8 @@ Features
  - Eventbus
  - Glide
  - MPAndroidChart
- - Loading data from Firebase
-
+ - Loading data from Firebase by year
+ - Support display data as Line, Bar Chart
 Usage
 -----
  - Reposity link : https://github.com/nqnhat1988/SA_Demo
@@ -22,6 +22,7 @@ Usage
  - Build and install to debug attached Android phone or simulator
  - Choose method to sign up as email or facebook
  - After login, go to main screen and see the chart
+ - Swipe right to open side bar, you will have option to show chart as Line Chart or Bar Chart.
 
 Install directly from Google Store
 -----
