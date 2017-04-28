@@ -7,6 +7,7 @@ Features
 -----
 
 **Core features:**
+ - Sign in as Guest
  - Sign up with email/password and Facebook using Firebase Authenticate Method
  - Eventbus
  - Glide
