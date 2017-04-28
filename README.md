@@ -27,7 +27,6 @@ Usage
 
 Install directly from Google Store
 -----
- - Login with account nhatdear.sa@gmail.com (password : nhatdear.sademo) on Android Phone.
  - Enter the link "https://play.google.com/store/apps/details?id=com.nhatdear.sademo" on web or search "nhatdear.sademo" on Google Store
  - Install the app
  
