@@ -5,7 +5,7 @@
     <string name="font_MontserratRegular">Montserrat-Regular.ttf</string>
     <string name="font_OpenSans">OpenSans-Regular.ttf</string>
     <string name="excuse_me">EXCUSE ME</string>
-    <string name="please_enter_user_name">Enter a username</string>
+    <string name="please_enter_user_name">Enter your display name</string>
     <string name="ok">OK</string>
     <string name="cancel">CANCEL</string>
     <string name="auth_failed">Authentication failed</string>
@@ -38,5 +38,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="signUpWithGuest">Login As Guest</string>
 
 </resources>

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.nhatdear.sademo.R;
+import com.nhatdear.sademo.activities.SA_LoginActivity;
 import com.nhatdear.sademo.components.MyCustomButtonView;
 import com.nhatdear.sademo.components.MyCustomTextView;
 import com.nhatdear.sademo.helpers.SA_TagSpan;
@@ -21,6 +22,7 @@ public class SA_WelcomeFragment extends Fragment {
     MyCustomTextView tv_information;
     MyCustomButtonView btn_doLogin;
     MyCustomButtonView btn_signUpEmail;
+    MyCustomButtonView btn_signUpGuest;
     LinearLayout ln_signUpFB;
     private OnFragmentInteractionListener mListener;
 
@@ -83,7 +85,14 @@ public class SA_WelcomeFragment extends Fragment {
 
         ln_signUpFB = (LinearLayout)v.findViewById(R.id.ln_signUpFB);
         ln_signUpFB.setOnClickListener(view -> signUpFB());
+
+        btn_signUpGuest = (MyCustomButtonView)v.findViewById(R.id.btn_signUpGuest);
+        btn_signUpGuest.setOnClickListener(view -> loginAsGuest());
         return v;
+    }
+
+    private void loginAsGuest() {
+        ((SA_LoginActivity)getActivity()).doLoginWithEmail("nhatdear1988@gmail.com","Allinone123");
     }
 
     public void onLoginBtnClick() {

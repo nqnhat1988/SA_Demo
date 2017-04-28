@@ -96,6 +96,29 @@
         android:layout_alignLeft="@+id/tv_information"
         android:layout_alignStart="@+id/tv_information" />
 
+    <ImageView
+        android:id="@+id/line_Divider2"
+        android:layout_width="200dp"
+        android:layout_height="2dp"
+        android:layout_below="@+id/btn_signUpEmail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="#dddddd" />
+
+    <com.nhatdear.sademo.components.MyCustomButtonView
+        android:id="@+id/btn_signUpGuest"
+        style="@style/ButtonStyleDark"
+        android:layout_width="300dp"
+        android:layout_height="43dp"
+        android:letterSpacing="0.2"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/line_Divider2"
+        android:text="@string/signUpWithGuest"
+        android:textSize="12sp"
+        app:bt_customFont="@string/font_MontserratRegular"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/tv_information"
+        android:layout_alignStart="@+id/tv_information" />
 
     <com.nhatdear.sademo.components.MyCustomTextView
         android:id="@+id/tv_information"
